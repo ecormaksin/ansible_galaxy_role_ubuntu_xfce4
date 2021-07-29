@@ -1,2 +1,15 @@
 ---
 # tasks file for ansible_galaxy_role_ubuntu_xfce4
+
+- name: "Install xfce4 | install packages"
+  become: yes
+  ignore_errors: "{{ ansible_check_mode }}"
+  apt:
+    pkg:
+      - xfce4
+      - xfce4-goodies
+    update_cache: yes
+
+- name: "Install xfce4 | create xsession file"
+  ignore_errors: "{{ ansible_check_mode }}"
+  shell: echo xfce4-session > $HOME/.xsession
